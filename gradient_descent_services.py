@@ -4,13 +4,13 @@
 # version 1.2 -- 2023-09-10
 
 from sys import argv
-import rwfile as rw
+import read_argv as ra
 import numpy as np
 import matplotlib.pyplot as plt
 
 def help_needed():
     option_help = "-help"
-    help_request = rw.is_option(option_help, start_from = 1)
+    help_request = ra.is_option(option_help, start_from = 1)
     return help_request
     
 def print_help(default_a, default_l):
@@ -36,7 +36,7 @@ def print_help(default_a, default_l):
 def load_data():
     Xfile_in, yfile_in = argv[1], argv[2]
     option_bin = "-bin"
-    bin_files = rw.is_option(option_bin)
+    bin_files = ra.is_option(option_bin)
     if bin_files:
         X_train = np.load(Xfile_in)
         y_train = np.load(yfile_in)
@@ -55,31 +55,31 @@ def load_initial_param(default_a, default_l, n, mu, sigma):
     option_lambda = "-lambda"
     option_print = "-print"
     option_plot = "-plot"
-    if rw.is_option(option_a):
-        a = float(rw.find_option_arg(option_a))
+    if ra.is_option(option_a):
+        a = float(ra.find_option_arg(option_a))
     else:
         a = default_a
-    if rw.is_option(option_wfile):
-        w_in = np.loadtxt(rw.find_option_arg(option_wfile))
+    if ra.is_option(option_wfile):
+        w_in = np.loadtxt(ra.find_option_arg(option_wfile))
         w_init = sigma*w_in
-    elif rw.is_option(option_w):
-        w_in = np.array([float(rw.find_option_arg(option_w))])
+    elif ra.is_option(option_w):
+        w_in = np.array([float(ra.find_option_arg(option_w))])
         w_init = sigma*w_in
     else:
         w_init = np.zeros(n)
-    if rw.is_option(option_b):
-        b_in = float(rw.find_option_arg(option_b))
+    if ra.is_option(option_b):
+        b_in = float(ra.find_option_arg(option_b))
         b_init = b_in+np.sum(w_init*mu/sigma)
     else:
         b_init = 0.0+np.sum(w_init*mu/sigma)
-    logistic_regr = rw.is_option(option_logistic)
-    regularization = rw.is_option(option_regularize)
-    if rw.is_option(option_lambda):
-        l = float(rw.find_option_arg(option_lambda))
+    logistic_regr = ra.is_option(option_logistic)
+    regularization = ra.is_option(option_regularize)
+    if ra.is_option(option_lambda):
+        l = float(ra.find_option_arg(option_lambda))
     else:
         l = default_l
-    print_loop = rw.is_option(option_print)
-    plot_j = rw.is_option(option_plot)
+    print_loop = ra.is_option(option_print)
+    plot_j = ra.is_option(option_plot)
     return (a, w_init, b_init, logistic_regr, regularization, l, print_loop, plot_j)
 
 def make_plot(j_hist):
