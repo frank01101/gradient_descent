@@ -1,14 +1,14 @@
 # gradient_descent
-Gradient descent for multiple linear and logistic regression with feature scaling and regularization.
+This is an implementation of gradient descent for multiple linear and logistic regression with feature scaling and regularization. It utilizes NumPy arrays and its matrix/vector operations which improves performance significantly by parallel computations based on C loops instead of Python loops. On request, it plots cost function versus algorithm steps in a custom scale of `steps in k*10**l`, where `k in {1, ..., 9}` and `l in non-negative Integers`.
 
-Usage:
+## Usage:
     ./gradient_descent.py <X_file> <y_file> -bin -rate [alpha] (-wfile [w_file] OR -w [w_value]) -b [b_value] -logistic -regularize -lambda [lambda] -print -plot -help
 
-Mandatory arguments:
-    <X_file>    path to the file with feature data;
-    <y_file>    path to the file with target data;
+### Mandatory arguments:
+    <X_file>    path to the file with feature data, whitespace separated;
+    <y_file>    path to the file with target data, whitespace separated;
 
-Options:
+### Options:
     -bin        use when files are binary; by default they are assumed to be text files;
     -rate       input learning rate [alpha]; by default it is default_a;
     -wfile      input path to the file [w_file] with starting values of w parameters -- in the case when there is more than one feature; by default they are set to zeros;
